@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sur Mary Cartwright</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+    <div id="app" class="p-8">
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+            <div id="quiz-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "En quelle année Mary Cartwright est-elle née ?",
+                options: ["1895", "1900", "1905", "1910"],
+                correct: 1,
+                explanation: "Mary Cartwright est née en 1900 en Angleterre."
+            },
+            {
+                question: "Quelle université Mary Cartwright a-t-elle fréquentée ?",
+                options: ["Cambridge", "Oxford", "Londres", "Manchester"],
+                correct: 1,
+                explanation: "Elle a étudié à l'université d'Oxford."
+            },
+            {
+                question: "Quel exploit Mary Cartwright a-t-elle accompli à Oxford ?",
+                options: [
+                    "Première femme professeure",
+                    "Première femme à obtenir un doctorat en mathématiques",
+                    "Première femme étudiante",
+                    "Première femme directrice"
+                ],
+                correct: 1,
+                explanation: "Elle est devenue la première femme à obtenir un doctorat en mathématiques à Oxford."
+            },
+            {
+                question: "Avec quel mathématicien Mary Cartwright a-t-elle collaboré ?",
+                options: ["Isaac Newton", "Alan Turing", "J. E. Littlewood", "Stephen Hawking"],
+                correct: 2,
+                explanation: "Elle a travaillé avec J. E. Littlewood sur les équations différentielles."
+            },
+            {
+                question: "Quel type d'équations Mary Cartwright étudiait-elle ?",
+                options: [
+                    "Équations linéaires simples",
+                    "Équations différentielles non linéaires",
+                    "Équations algébriques",
+                    "Équations quadratiques"
+                ],
+                correct: 1,
+                explanation: "Elle étudiait les équations différentielles non linéaires."
+            },
+            {
+                question: "À quelle théorie moderne Mary Cartwright a-t-elle contribué ?",
+                options: ["Théorie de la relativité", "Théorie du chaos", "Théorie quantique", "Théorie des cordes"],
+                correct: 1,
+                explanation: "Ses découvertes ont contribué à ce qui deviendra la théorie du chaos."
+            },
+            {
+                question: "Pour quelle technologie ses recherches étaient-elles utiles pendant la guerre ?",
+                options: ["Avions", "Radars", "Missiles", "Sous-marins"],
+                correct: 1,
+                explanation: "Elle a travaillé sur des équations liées aux systèmes radio et radar."
+            },
+            {
+                question: "Quelle première a-t-elle accomplie à la London Mathematical Society ?",
+                options: [
+                    "Première membre",
+                    "Première conférencière",
+                    "Première femme à diriger la société",
+                    "Première à publier un article"
+                ],
+                correct: 2,
+                explanation: "Elle a été la première femme à diriger la London Mathematical Society."
+            },
+            {
+                question: "Dans quelle institution prestigieuse a-t-elle été admise ?",
+                options: ["L'Académie française", "La Royal Society", "L'ONU", "La NASA"],
+                correct: 1,
+                explanation: "Elle a été l'une des premières femmes admises à la Royal Society."
+            },
+            {
+                question: "En quelle année Mary Cartwright est-elle décédée ?",
+                options: ["1988", "1993", "1998", "2003"],
+                correct: 2,
+                explanation: "Mary Cartwright est morte en 1998, laissant un héritage important en mathématiques."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            const question = questions[currentQuestion];
+
+            container.innerHTML = `
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-semibold text-purple-600">
+                            Question ${currentQuestion + 1}/${questions.length}
+                        </span>
+                        <span class="text-sm font-semibold text-gray-600">
+                            Score: ${score}/${questions.length}
+                        </span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-purple-600 h-2 rounded-full transition-all duration-300" 
+                             style="width: ${((currentQuestion + 1) / questions.length) * 100}%">
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">
+                    ${question.question}
+                </h2>
+
+                <div class="space-y-3 mb-6" id="options-container">
+                    ${question.options.map((option, index) => `
+                        <button 
+                            onclick="handleAnswer(${index})"
+                            id="option-${index}"
+                            class="w-full p-4 rounded-lg text-left font-medium transition-all bg-gray-50 hover:bg-purple-50 border-2 border-gray-200 hover:border-purple-300">
+                            ${option}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div id="explanation-container"></div>
+                <div id="next-button-container"></div>
+            `;
+        }
+
+        function handleAnswer(index) {
+            if (selectedAnswer !== null) return;
+            
+            selectedAnswer = index;
+            const question = questions[currentQuestion];
+            const isCorrect = index === question.correct;
+            
+            if (isCorrect) {
+                score++;
+            }
+
+            // Update button styles
+            question.options.forEach((_, i) => {
+                const btn = document.getElementById(`option-${i}`);
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-purple-50', 'hover:border-purple-300');
+                
+                if (i === question.correct) {
+                    btn.classList.add('bg-green-100', 'border-green-500');
+                    btn.innerHTML += ' ✓';
+                } else if (i === index && !isCorrect) {
+                    btn.classList.add('bg-red-100', 'border-red-500');
+                    btn.innerHTML += ' ✗';
+                }
+            });
+
+            // Show explanation
+            document.getElementById('explanation-container').innerHTML = `
+                <div class="p-4 rounded-lg mb-6 ${isCorrect ? 'bg-green-50 border-l-4 border-green-500' : 'bg-blue-50 border-l-4 border-blue-500'}">
+                    <p class="text-gray-700">${question.explanation}</p>
+                </div>
+            `;
+
+            // Show next button
+            document.getElementById('next-button-container').innerHTML = `
+                <button 
+                    onclick="nextQuestion()"
+                    class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    ${currentQuestion < questions.length - 1 ? 'Question suivante' : 'Voir les résultats'}
+                </button>
+            `;
+        }
+
+        function nextQuestion() {
+            selectedAnswer = null;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuiz();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const container = document.getElementById('quiz-container');
+            const percentage = (score / questions.length) * 100;
+            let message = '';
+            
+            if (percentage >= 80) message = "🎉 Excellent travail !";
+            else if (percentage >= 60) message = "👍 Bien joué !";
+            else if (percentage >= 40) message = "💪 Pas mal, continue !";
+            else message = "📚 Relis le texte et réessaye !";
+
+            container.innerHTML = `
+                <h2 class="text-3xl font-bold text-center mb-6 text-purple-800">
+                    Résultats du Quiz
+                </h2>
+                <div class="text-center mb-8">
+                    <div class="text-6xl font-bold text-purple-600 mb-4">
+                        ${score}/${questions.length}
+                    </div>
+                    <div class="text-2xl text-gray-700 mb-2">
+                        Score: ${percentage.toFixed(0)}%
+                    </div>
+                    <div class="text-lg text-gray-600">
+                        ${message}
+                    </div>
+                </div>
+                <button
+                    onclick="restartQuiz()"
+                    class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    Recommencer le quiz
+                </button>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            selectedAnswer = null;
+            renderQuiz();
+        }
+
+        // Start the quiz
+        renderQuiz();
+    </script>
+</body>
+</html>
