@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz sur Mary Cartwright</title>
+    <title>Quiz about Mary Cartwright</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -21,79 +21,79 @@
     <script>
         const questions = [
             {
-                question: "En quelle année Mary Cartwright est-elle née ?",
+                question: "What year was Mary Cartwright born?",
                 options: ["1895", "1900", "1905", "1910"],
                 correct: 1,
-                explanation: "Mary Cartwright est née en 1900 en Angleterre."
+                explanation: "Mary Cartwright was born in 1900 in England."
             },
             {
-                question: "Quelle université Mary Cartwright a-t-elle fréquentée ?",
-                options: ["Cambridge", "Oxford", "Londres", "Manchester"],
+                question: "Which university did Mary Cartwright attend?",
+                options: ["Cambridge", "Oxford", "London", "Manchester"],
                 correct: 1,
-                explanation: "Elle a étudié à l'université d'Oxford."
+                explanation: "She studied at Oxford University."
             },
             {
-                question: "Quel exploit Mary Cartwright a-t-elle accompli à Oxford ?",
+                question: "What achievement did Mary Cartwright accomplish at Oxford?",
                 options: [
-                    "Première femme professeure",
-                    "Première femme à obtenir un doctorat en mathématiques",
-                    "Première femme étudiante",
-                    "Première femme directrice"
+                    "First female professor",
+                    "First woman to earn a PhD in mathematics",
+                    "First female student",
+                    "First female director"
                 ],
                 correct: 1,
-                explanation: "Elle est devenue la première femme à obtenir un doctorat en mathématiques à Oxford."
+                explanation: "She became the first woman to earn a PhD in mathematics at Oxford."
             },
             {
-                question: "Avec quel mathématicien Mary Cartwright a-t-elle collaboré ?",
+                question: "Which mathematician did Mary Cartwright collaborate with?",
                 options: ["Isaac Newton", "Alan Turing", "J. E. Littlewood", "Stephen Hawking"],
                 correct: 2,
-                explanation: "Elle a travaillé avec J. E. Littlewood sur les équations différentielles."
+                explanation: "She worked with J. E. Littlewood on differential equations."
             },
             {
-                question: "Quel type d'équations Mary Cartwright étudiait-elle ?",
+                question: "What type of equations did Mary Cartwright study?",
                 options: [
-                    "Équations linéaires simples",
-                    "Équations différentielles non linéaires",
-                    "Équations algébriques",
-                    "Équations quadratiques"
+                    "Simple linear equations",
+                    "Nonlinear differential equations",
+                    "Algebraic equations",
+                    "Quadratic equations"
                 ],
                 correct: 1,
-                explanation: "Elle étudiait les équations différentielles non linéaires."
+                explanation: "She studied nonlinear differential equations."
             },
             {
-                question: "À quelle théorie moderne Mary Cartwright a-t-elle contribué ?",
-                options: ["Théorie de la relativité", "Théorie du chaos", "Théorie quantique", "Théorie des cordes"],
+                question: "Which modern theory did Mary Cartwright contribute to?",
+                options: ["Theory of relativity", "Chaos theory", "Quantum theory", "String theory"],
                 correct: 1,
-                explanation: "Ses découvertes ont contribué à ce qui deviendra la théorie du chaos."
+                explanation: "Her discoveries contributed to what would become chaos theory."
             },
             {
-                question: "Pour quelle technologie ses recherches étaient-elles utiles pendant la guerre ?",
-                options: ["Avions", "Radars", "Missiles", "Sous-marins"],
+                question: "Which technology were her wartime research findings useful for?",
+                options: ["Aircraft", "Radar", "Missiles", "Submarines"],
                 correct: 1,
-                explanation: "Elle a travaillé sur des équations liées aux systèmes radio et radar."
+                explanation: "She worked on equations related to radio and radar systems."
             },
             {
-                question: "Quelle première a-t-elle accomplie à la London Mathematical Society ?",
+                question: "What first did she accomplish at the London Mathematical Society?",
                 options: [
-                    "Première membre",
-                    "Première conférencière",
-                    "Première femme à diriger la société",
-                    "Première à publier un article"
+                    "First member",
+                    "First speaker",
+                    "First woman to lead the society",
+                    "First to publish an article"
                 ],
                 correct: 2,
-                explanation: "Elle a été la première femme à diriger la London Mathematical Society."
+                explanation: "She was the first woman to lead the London Mathematical Society."
             },
             {
-                question: "Dans quelle institution prestigieuse a-t-elle été admise ?",
-                options: ["L'Académie française", "La Royal Society", "L'ONU", "La NASA"],
+                question: "Which prestigious institution admitted her?",
+                options: ["The French Academy", "The Royal Society", "The UN", "NASA"],
                 correct: 1,
-                explanation: "Elle a été l'une des premières femmes admises à la Royal Society."
+                explanation: "She was one of the first women admitted to the Royal Society."
             },
             {
-                question: "En quelle année Mary Cartwright est-elle décédée ?",
+                question: "What year did Mary Cartwright pass away?",
                 options: ["1988", "1993", "1998", "2003"],
                 correct: 2,
-                explanation: "Mary Cartwright est morte en 1998, laissant un héritage important en mathématiques."
+                explanation: "Mary Cartwright died in 1998, leaving an important legacy in mathematics."
             }
         ];
 
@@ -180,7 +180,7 @@
                 <button 
                     onclick="nextQuestion()"
                     class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
-                    ${currentQuestion < questions.length - 1 ? 'Question suivante' : 'Voir les résultats'}
+                    ${currentQuestion < questions.length - 1 ? 'Next Question' : 'See Results'}
                 </button>
             `;
         }
@@ -201,14 +201,14 @@
             const percentage = (score / questions.length) * 100;
             let message = '';
             
-            if (percentage >= 80) message = "🎉 Excellent travail !";
-            else if (percentage >= 60) message = "👍 Bien joué !";
-            else if (percentage >= 40) message = "💪 Pas mal, continue !";
-            else message = "📚 Relis le texte et réessaye !";
+            if (percentage >= 80) message = "🎉 Excellent work!";
+            else if (percentage >= 60) message = "👍 Well done!";
+            else if (percentage >= 40) message = "💪 Not bad, keep going!";
+            else message = "📚 Review the text and try again!";
 
             container.innerHTML = `
                 <h2 class="text-3xl font-bold text-center mb-6 text-purple-800">
-                    Résultats du Quiz
+                    Quiz Results
                 </h2>
                 <div class="text-center mb-8">
                     <div class="text-6xl font-bold text-purple-600 mb-4">
@@ -224,7 +224,7 @@
                 <button
                     onclick="restartQuiz()"
                     class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
-                    Recommencer le quiz
+                    Restart Quiz
                 </button>
             `;
         }
